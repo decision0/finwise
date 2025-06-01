@@ -1,55 +1,46 @@
 # 💸 Finwise – Wise API Sandbox Integration
 
-**Finwise** is a developer demo project showcasing seamless Wise API integration for international money transfers. It simulates a realistic payout flow using Wise's sandbox environment: from recipient creation, quote generation, transfer initiation, to webhook tracking.
+**Finwise** is a backend demo project that showcases how to integrate with Wise's public API (sandbox environment) to simulate international money transfers. It covers the entire transfer workflow: from recipient creation and quote generation to transfer initiation and webhook event handling.
 
-Built with Node.js and Express, this project is designed to demonstrate backend API integration skills relevant to fintech platforms like loan disbursement, freelancer payments, or vendor payouts.
+Built with **Node.js** and **Express**, this project demonstrates a realistic fintech use case such as loan disbursement or freelance payouts, using the most up-to-date Wise sandbox endpoints (`https://api.sandbox.transferwise.tech`).
 
 ---
 
 ## 🚀 Quick Start
 
 ### 1. Clone the repository
-
 ```bash
 git clone https://github.com/decision0/finwise.git
 cd finwise
 ```
 
 ### 2. Install dependencies
-
 ```bash
 npm install
 ```
 
 ### 3. Configure your environment
-
-Create a `.env` file with:
-
+Create a `.env` file:
 ```env
-WISE_API_KEY=your_sandbox_api_key
+WISE_API_KEY=your_sandbox_api_token
 PROFILE_ID=your_profile_id
 PORT=3000
 ```
-
-> 🧪 Get your API key from https://sandbox.wise.com/profile/personal-api-tokens
+> 🧪 Get your API key from [Wise Sandbox](https://sandbox.wise.com) and make API requests via: `https://api.sandbox.transferwise.tech`
 
 ### 4. Run the server
-
 ```bash
 node server.js
 ```
 
 ### 5. Simulate a full transfer
-
 ```bash
 curl http://localhost:3000/simulate-transfer
 ```
 
 ### 6. Test webhook
-
-Use [Webhook.site](https://webhook.site) or Wise sandbox webhook config:
-
-```bash
+Use [Webhook.site](https://webhook.site) or Wise sandbox webhook settings:
+```
 POST http://localhost:3000/webhook
 ```
 
@@ -57,34 +48,32 @@ POST http://localhost:3000/webhook
 
 ## 🔁 Wise API Flow
 
-| Step | Endpoint             | Description                    |
-| ---- | -------------------- | ------------------------------ |
-| 1️⃣   | `GET /v1/profiles`   | Get your profile ID            |
-| 2️⃣   | `POST /v1/accounts`  | Create recipient account       |
-| 3️⃣   | `POST /v1/quotes`    | Generate quote (FX rate, fees) |
-| 4️⃣   | `POST /v1/transfers` | Initiate a money transfer      |
-| 5️⃣   | `POST /webhook`      | Receive transfer status update |
+| Step | Endpoint | Description |
+|------|----------|-------------|
+| 1️⃣ | `GET /v2/profiles` | Retrieve your profile ID |
+| 2️⃣ | `POST /v1/accounts` | Create recipient account |
+| 3️⃣ | `POST /v1/quotes` | Generate quote (FX rate, fees) |
+| 4️⃣ | `POST /v1/transfers` | Create a money transfer |
+| 5️⃣ | `POST /webhook` | Handle webhook status events |
 
-> See official docs: [Wise API Docs](https://docs.wise.com/api-docs/api-reference)
+📖 See full documentation: [Wise API Reference](https://docs.wise.com/api-docs/api-reference)
 
 ---
 
 ## 📂 Project Structure
-
 ```
 finwise/
 ├── src/
-│   ├── wise.js           # Wise API logic (recipient, quote, transfer)
-│   ├── webhook.js        # Webhook endpoint
-├── .env.example
-├── server.js             # Express server
+│   ├── wise.js           # Wise API functions (recipient, quote, transfer)
+│   ├── webhook.js        # Webhook route handler
+├── .env.example          # Sample environment variables
+├── server.js             # Express app entry point
 ├── README.md             # Project documentation
 ```
 
 ---
 
 ## 📬 Sample Webhook Payload
-
 ```json
 {
   "event_type": "transfers#state-change",
@@ -100,25 +89,25 @@ finwise/
 
 ## 💡 Why I Built This
 
-This project was created as a public demonstration of my understanding of Wise's developer APIs, secure payment automation, and modern backend development practices. It is designed to highlight:
+This project was created to showcase:
 
-- Strong grasp of REST API integrations
-- Familiarity with fintech workflows
-- Clean, maintainable code
-- Documentation and testing awareness
+- Proficiency in REST API integration with a real-world fintech API
+- Understanding of Wise's transfer lifecycle and event model
+- Clean, modular backend development using Node.js
+- Professional documentation and GitHub presentation
+
+I built **Finwise** as part of my application to demonstrate my suitability to work on global payments infrastructure like Wise.
 
 ---
 
 ## 🧠 Future Enhancements
-
-- [ ] Add frontend using Next.js (Tailwind CSS)
-- [ ] Simulate funding (sandbox `/payments` API)
-- [ ] CI/CD pipeline setup
-- [ ] Deployment to Render (backend) and Vercel (frontend)
-- [ ] Add support for multi-currency flows
+- [ ] Frontend app using Next.js + Tailwind CSS
+- [ ] Add funding step via `/v3/payments` API (sandbox only)
+- [ ] Display transfer history and webhook logs
+- [ ] Deploy to Render (backend) and Vercel (frontend)
+- [ ] Add test coverage and CI pipeline
 
 ---
 
 ## 📄 License
-
-MIT – free to use and modify.
+**MIT** – free to use, clone, and modify with attribution.
